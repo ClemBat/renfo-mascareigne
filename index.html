@@ -287,7 +287,14 @@
     <div class="slot a"><div class="time">7'<small>Bloc A</small></div><div class="what"><b>⛰️ Force / Montée (D+)</b><span>Fente / Split squat + Hip thrust unilatéral — 3 séries en superset.</span></div></div>
     <div class="slot b"><div class="time">11'<small>Bloc B</small></div><div class="what"><b>🔻 Spécifique descente / excentrique — le cœur</b><span>Step-down excentrique + Mollet excentrique (superset) puis Squat sauté amorti.</span></div></div>
     <div class="slot c"><div class="time">5'<small>Bloc C</small></div><div class="what"><b>🟢 Stabilité / gainage</b><span>Équilibre unipodal proprioceptif + Planche & Copenhagen.</span></div></div>
-    <div class="slot cool"><div class="time">3'<small>calme</small></div><div class="what"><b>🧘 Retour au calme</b><span>Étirements doux (quadris, mollets, fessiers, adducteurs), respiration. Pas d'étirement intense après l'excentrique.</span></div></div>
+    <div class="slot cool"><div class="time">3'<small>calme</small></div><div class="what"><b>🧘 Retour au calme — étirements doux</b><span>Tiens 20–30 s / côté, sans forcer. Pas d'étirement intense après l'excentrique.</span>
+      <ul class="warmlist">
+        <li>Quadriceps debout (talon aux fesses) — <a href="https://www.youtube.com/watch?v=wTU4BM_FxCY" target="_blank">▶ vidéo</a></li>
+        <li>Mollets contre un mur — <a href="https://www.youtube.com/watch?v=wTU4BM_FxCY" target="_blank">▶ vidéo</a></li>
+        <li>Fessiers / piriforme (figure 4 allongé) — <a href="https://www.youtube.com/watch?v=07Oz43jNleQ" target="_blank">▶ vidéo</a></li>
+        <li>Adducteurs (papillon assis) — <a href="https://www.youtube.com/watch?v=IbSrmUYyX4s" target="_blank">▶ vidéo</a></li>
+        <li>1 min de respiration lente pour finir</li>
+      </ul></div></div>
   </div>
 </div></section>
 
@@ -507,8 +514,11 @@ const STEPS=[
   W("c","Équilibre unipodal proprioceptif","Ajoute une surface molle si c'est trop facile.","30 s / jambe · série 2/2",60),
   W("c","Gainage : planche + Copenhagen","Respire, ne bloque pas.","planche + 10–20 s/côté · série 2/2",60),
   R(30,"cool"),
-  // COOL
-  W("cool","Retour au calme","Étirements doux : quadriceps, mollets, fessiers, adducteurs. Respiration lente.","3 min",180),
+  // COOL — étirements doux (sans forcer, tension légère)
+  W("cool","Étirement quadriceps (debout)","Talon vers la fesse, genoux serrés, bassin rentré. Appuie-toi à un mur.","20–30 s / jambe",45),
+  W("cool","Étirement mollets (contre un mur)","Jambe arrière tendue, talon au sol, avance le bassin.","20–30 s / jambe",45),
+  W("cool","Étirement fessiers / piriforme","Allongé, cheville sur le genou opposé (figure 4), ramène la cuisse à deux mains.","20–30 s / jambe",45),
+  W("cool","Étirement adducteurs (papillon assis)","Plantes de pieds jointes, dos droit, genoux qui descendent sans les forcer. Finis par la respiration lente.","20–30 s",45),
   W("cool","Séance terminée 💪","Bravo ! Note tes reps/charge/ressenti. N'oublie pas de cocher ta séance dans le suivi.","",5)
 ];
 const TOTAL=STEPS.reduce((s,x)=>s+x.dur,0);
