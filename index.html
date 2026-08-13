@@ -109,6 +109,9 @@
   .slot.cool .what{background:linear-gradient(90deg,rgba(159,179,194,.1),transparent)}
   .slot .what b{display:block;font-size:16px;margin-bottom:2px}
   .slot .what span{color:var(--muted);font-size:14px}
+  .warmlist{margin:8px 0 0;padding-left:18px;columns:2;column-gap:24px;color:var(--muted);font-size:13.5px}
+  .warmlist li{margin:3px 0;break-inside:avoid}.warmlist b{color:var(--ink)}
+  @media(max-width:560px){.warmlist{columns:1}}
 
   /* PROGRESSION */
   .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -270,7 +273,17 @@
   <p class="lead">Format en <b>superséries</b> (on enchaîne 2 exos puis on récupère) pour tout caser en 30 min. À faire un jour de course facile ou de repos — <b>jamais dans les 48 h avant une sortie longue.</b></p>
   <button id="startTimer" class="playbtn">▶ Lancer le dérouleur de séance (30 min guidées)</button>
   <div class="tl">
-    <div class="slot warm"><div class="time">4'<small>échauff.</small></div><div class="what"><b>🔥 Échauffement</b><span>Chevilles, balancers de jambe, 15 squats, 10 fentes/jambe, montées de genoux, talons-fesses.</span></div></div>
+    <div class="slot warm"><div class="time">4'<small>échauff.</small></div><div class="what"><b>🔥 Échauffement</b><span>Sans repos, intensité progressive :</span>
+      <ul class="warmlist">
+        <li>Cercles de chevilles — <b>10 / sens / cheville</b></li>
+        <li>Balancers de jambe avant/arrière — <b>10 / jambe</b></li>
+        <li>Balancers de jambe latéraux — <b>10 / jambe</b></li>
+        <li>Squats au poids du corps — <b>15</b></li>
+        <li>Fentes alternées dynamiques — <b>10 / jambe</b></li>
+        <li>Montées de genoux sur place — <b>20</b> (10/jambe)</li>
+        <li>Talons-fesses — <b>20</b> (10/jambe)</li>
+        <li>Sautillements légers sur l'avant-pied — <b>20</b></li>
+      </ul></div></div>
     <div class="slot a"><div class="time">7'<small>Bloc A</small></div><div class="what"><b>⛰️ Force / Montée (D+)</b><span>Fente / Split squat + Hip thrust unilatéral — 3 séries en superset.</span></div></div>
     <div class="slot b"><div class="time">11'<small>Bloc B</small></div><div class="what"><b>🔻 Spécifique descente / excentrique — le cœur</b><span>Step-down excentrique + Mollet excentrique (superset) puis Squat sauté amorti.</span></div></div>
     <div class="slot c"><div class="time">5'<small>Bloc C</small></div><div class="what"><b>🟢 Stabilité / gainage</b><span>Équilibre unipodal proprioceptif + Planche & Copenhagen.</span></div></div>
@@ -453,7 +466,13 @@ const PH={warm:"Échauffement",a:"Bloc A · Montée (D+)",b:"Bloc B · Descente 
 function W(ph,name,sub,target,dur){return{ph,name,sub,target,dur}}
 function R(dur,ph){return{ph:"rest",name:"Récupération",sub:"Respire, relâche.",target:"",dur,nextph:ph}}
 const STEPS=[
-  W("warm","Échauffement","Chevilles, balancers de jambe, squats, fentes, montées de genoux, talons-fesses. Monte progressivement en intensité.","4 min en continu",240),
+  W("warm","Cercles de chevilles","Amplitude maximale, mouvement lent. Prépare les chevilles.","10 / sens / cheville",30),
+  W("warm","Balancers de jambe","Avant/arrière puis latéraux, appui sur un mur, jambe relâchée.","10 / jambe dans chaque direction",40),
+  W("warm","Squats au poids du corps","Amplitude complète, buste droit, on monte la température.","15 répétitions",40),
+  W("warm","Fentes alternées dynamiques","Genou dans l'axe du pied, descente contrôlée.","10 / jambe",40),
+  W("warm","Montées de genoux sur place","Rythme progressif, gaine le tronc.","20 (10 / jambe)",30),
+  W("warm","Talons-fesses","Souple, sur l'avant-pied.","20 (10 / jambe)",30),
+  W("warm","Sautillements légers sur l'avant-pied","Souples et silencieux : réveille l'élasticité et prépare aux impacts.","20 sautillements",30),
   // BLOC A x3 (140s/round)
   W("a","Fente / Split squat","Descente contrôlée, genou dans l'axe, poids sur la jambe avant.","8–12 / jambe · série 1/3",50),
   W("a","Hip thrust unilatéral","Pousse avec le fessier, serre 2 s en haut.","12–20 / jambe · série 1/3",50),
