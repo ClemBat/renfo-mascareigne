@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renfo Trail — La Réunion 16 oct</title>
+<style>
+  :root{
+    --bg:#0f1720; --card:#182430; --card2:#1e2d3b; --ink:#eaf2f8; --muted:#9fb3c2;
+    --up:#f4a13c; --down:#ff5d5d; --both:#7bd88f; --acc:#4cc2ff;
+    --line:#2a3a49; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 70% -10%,#1b2a38 0,var(--bg) 55%);color:var(--ink);line-height:1.55}
+  a{color:var(--acc)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* HERO */
+  header.hero{position:relative;padding:54px 0 40px;overflow:hidden;border-bottom:1px solid var(--line)}
+  .mountains{position:absolute;inset:auto 0 0 0;height:150px;opacity:.5;pointer-events:none}
+  .kicker{letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--acc);font-weight:700}
+  h1{font-size:clamp(28px,5vw,46px);margin:.15em 0 .1em;line-height:1.05}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .badge{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center}
+  .badge b{color:var(--acc)}
+  .countdown{margin-left:auto;text-align:right}
+  .countdown .n{font-size:34px;font-weight:800;color:var(--up);line-height:1}
+  .countdown .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(15,23,32,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:6px;overflow:auto;padding:10px 20px}
+  nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:8px;white-space:nowrap}
+  nav a:hover{color:var(--ink);background:var(--card)}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:26px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+  h2 .em{font-size:26px}
+  .lead{color:var(--muted);margin:0 0 22px;max-width:760px}
+
+  /* D+/D- battle */
+  .battle{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .col{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .col h3{margin:0 0 4px;font-size:20px;display:flex;align-items:center;gap:8px}
+  .col.up h3{color:var(--up)} .col.down h3{color:var(--down)}
+  .meter{height:14px;border-radius:999px;background:#0c141c;overflow:hidden;margin:12px 0}
+  .meter i{display:block;height:100%}
+  .meter.up i{width:73%;background:linear-gradient(90deg,#f4a13c,#ffce8a)}
+  .meter.down i{width:100%;background:linear-gradient(90deg,#ff5d5d,#ff9a9a)}
+  .col ul{margin:10px 0 0;padding-left:18px;color:var(--muted)} .col li{margin:4px 0}
+  .col li b{color:var(--ink)}
+  .insight{margin-top:16px;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);
+    border-left:4px solid var(--both);border-radius:12px;padding:14px 16px}
+  .insight b{color:var(--both)}
+
+  /* FILTERS */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .chip{cursor:pointer;user-select:none;border:1px solid var(--line);background:var(--card);color:var(--muted);
+    padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px}
+  .chip.active{color:#0f1720;background:var(--ink)}
+  .chip[data-f="dplus"].active{background:var(--up)} .chip[data-f="dmoins"].active{background:var(--down)}
+
+  /* EXERCISE CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;transition:transform .15s ease,border-color .15s}
+  .ex:hover{transform:translateY(-3px);border-color:#3a5064}
+  .ex .top{padding:16px 16px 8px;display:flex;gap:10px;align-items:flex-start}
+  .ex .ico{font-size:30px;line-height:1}
+  .ex h4{margin:0;font-size:17px}
+  .ex .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 16px 0}
+  .tag{font-size:11px;font-weight:800;letter-spacing:.04em;padding:4px 9px;border-radius:999px;text-transform:uppercase}
+  .tag.dplus{background:rgba(244,161,60,.16);color:var(--up);border:1px solid rgba(244,161,60,.4)}
+  .tag.dmoins{background:rgba(255,93,93,.16);color:var(--down);border:1px solid rgba(255,93,93,.4)}
+  .tag.both{background:rgba(123,216,143,.16);color:var(--both);border:1px solid rgba(123,216,143,.4)}
+  .tag.block{background:rgba(76,194,255,.14);color:var(--acc);border:1px solid rgba(76,194,255,.35)}
+  .ex .goal{padding:8px 16px 2px;color:var(--muted);font-size:14px}
+  .dose{display:flex;gap:8px;padding:10px 16px 4px;flex-wrap:wrap}
+  .dose span{background:#0c141c;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600}
+  .dose span small{color:var(--muted);font-weight:500}
+  .diff{display:flex;gap:4px;align-items:center;padding:8px 16px 0;font-size:12px;color:var(--muted)}
+  .dot{width:9px;height:9px;border-radius:50%;background:#33475a}.dot.on{background:var(--acc)}
+  .ex details{margin:10px 16px 0;border-top:1px solid var(--line)}
+  .ex summary{cursor:pointer;padding:10px 0 4px;font-weight:700;color:var(--acc);list-style:none;font-size:14px}
+  .ex summary::-webkit-details-marker{display:none}
+  .ex summary:before{content:"▸ ";}
+  .ex details[open] summary:before{content:"▾ "}
+  .ex .body{font-size:14px;color:var(--muted)}
+  .ex .body p{margin:8px 0}.ex .body b{color:var(--ink)}
+  .ex .foot{margin-top:auto;padding:14px 16px}
+  .vid{display:inline-flex;align-items:center;gap:8px;background:#ff2b2b;color:#fff;text-decoration:none;
+    font-weight:700;padding:9px 14px;border-radius:10px;font-size:14px}
+  .vid:hover{background:#e01f1f}
+  .vid.alt{background:#243545;color:var(--ink);margin-left:8px}
+
+  /* TIMELINE session */
+  .tl{display:flex;flex-direction:column;gap:10px}
+  .slot{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:stretch}
+  .slot .time{background:#0c141c;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .slot .time small{font-size:11px;color:var(--muted);font-weight:600}
+  .slot .what{border-radius:12px;padding:14px 16px;border:1px solid var(--line)}
+  .slot.warm .what{background:linear-gradient(90deg,rgba(76,194,255,.12),transparent)}
+  .slot.a .what{background:linear-gradient(90deg,rgba(244,161,60,.14),transparent);border-left:4px solid var(--up)}
+  .slot.b .what{background:linear-gradient(90deg,rgba(255,93,93,.14),transparent);border-left:4px solid var(--down)}
+  .slot.c .what{background:linear-gradient(90deg,rgba(123,216,143,.13),transparent);border-left:4px solid var(--both)}
+  .slot.cool .what{background:linear-gradient(90deg,rgba(159,179,194,.1),transparent)}
+  .slot .what b{display:block;font-size:16px;margin-bottom:2px}
+  .slot .what span{color:var(--muted);font-size:14px}
+
+  /* PROGRESSION */
+  .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .phase{border-radius:16px;padding:18px;border:1px solid var(--line);background:var(--card);position:relative;overflow:hidden}
+  .phase .p{position:absolute;top:0;left:0;width:100%;height:5px}
+  .phase.p1 .p{background:var(--acc)} .phase.p2 .p{background:var(--up)}
+  .phase.p3 .p{background:var(--down)} .phase.p4 .p{background:var(--both)}
+  .phase .wk{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .phase h4{margin:6px 0 2px;font-size:18px}
+  .phase .dates{color:var(--acc);font-weight:600;font-size:13px;margin-bottom:8px}
+  .phase ul{margin:0;padding-left:16px;color:var(--muted);font-size:13.5px}.phase li{margin:4px 0}
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:20px}
+  .rule{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .rule .q{font-weight:700;color:var(--ink);margin-bottom:4px;font-size:14px}
+  .rule .a{color:var(--muted);font-size:13.5px}
+
+  /* TRACKER */
+  .tracker{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:14px}
+  .wk-cell{background:#0c141c;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:center;transition:.15s}
+  .wk-cell:hover{border-color:#3a5064}
+  .wk-cell.done{background:linear-gradient(180deg,rgba(123,216,143,.25),rgba(123,216,143,.08));border-color:var(--both)}
+  .wk-cell .d{font-size:12px;color:var(--muted)}
+  .wk-cell .s{font-size:22px;margin-top:4px}
+  .wk-cell.done .s:after{content:"✅"} .wk-cell .s:after{content:"⬜"}
+  .wk-cell b{display:block;margin-top:4px;font-size:13px}
+  .progresswrap{height:12px;background:#0c141c;border-radius:999px;overflow:hidden;margin:16px 0 4px}
+  #bar{height:100%;width:0;background:linear-gradient(90deg,var(--both),var(--acc));transition:width .4s}
+  .ptxt{font-size:13px;color:var(--muted)}
+  .reset{margin-top:12px;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:13px}
+  .reset:hover{color:var(--ink);border-color:#3a5064}
+
+  /* PLAYER */
+  .playbtn{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;cursor:pointer;font-weight:800;font-size:16px;
+    color:#0f1720;background:linear-gradient(90deg,var(--both),var(--acc));border:none;border-radius:12px;padding:14px 20px;
+    box-shadow:var(--shadow)}
+  .playbtn:hover{filter:brightness(1.06)}
+  .overlay{position:fixed;inset:0;z-index:100;background:rgba(8,13,18,.97);display:none;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:20px}
+  .overlay.on{display:flex}
+  .ov-phase{position:absolute;top:0;left:0;width:100%;height:6px;transition:background .3s}
+  .ov-phase.warm{background:var(--acc)} .ov-phase.a{background:var(--up)} .ov-phase.b{background:var(--down)}
+  .ov-phase.c{background:var(--both)} .ov-phase.cool{background:var(--muted)} .ov-phase.rest{background:#33475a}
+  .ov-close{position:absolute;top:16px;right:20px;background:transparent;border:1px solid var(--line);color:var(--muted);
+    border-radius:8px;padding:8px 14px;cursor:pointer;font-size:14px}
+  .ov-close:hover{color:var(--ink)}
+  .ov-kicker{letter-spacing:.2em;text-transform:uppercase;font-size:13px;font-weight:800}
+  .ov-kicker.warm{color:var(--acc)} .ov-kicker.a{color:var(--up)} .ov-kicker.b{color:var(--down)}
+  .ov-kicker.c{color:var(--both)} .ov-kicker.cool{color:var(--muted)} .ov-kicker.rest{color:#7f97ab}
+  .ov-name{font-size:clamp(26px,6vw,46px);font-weight:800;margin:6px 0 2px;max-width:900px}
+  .ov-sub{color:var(--muted);font-size:clamp(15px,2.5vw,19px);max-width:620px;min-height:1.4em}
+  .ov-target{margin-top:10px;font-size:15px;color:var(--ink);font-weight:700;background:var(--card);border:1px solid var(--line);
+    display:inline-block;padding:8px 16px;border-radius:999px}
+  .ring{position:relative;width:min(58vw,300px);height:min(58vw,300px);margin:22px 0 6px}
+  .ring svg{transform:rotate(-90deg);width:100%;height:100%}
+  .ring .bg{fill:none;stroke:#1b2836;stroke-width:10}
+  .ring .fg{fill:none;stroke:var(--acc);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke .3s}
+  .ring .num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(44px,12vw,80px);font-weight:800;font-variant-numeric:tabular-nums}
+  .ov-next{color:var(--muted);font-size:14px;margin-top:4px}
+  .ov-next b{color:var(--ink)}
+  .ov-ctrl{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;justify-content:center}
+  .ov-ctrl button{cursor:pointer;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    font-weight:700;font-size:16px;padding:14px 20px;min-width:64px}
+  .ov-ctrl button:hover{border-color:#3a5064}
+  .ov-ctrl .main{background:var(--ink);color:#0f1720;border:none;min-width:120px}
+  .ov-bar{position:absolute;bottom:0;left:0;width:100%;height:5px;background:#0c141c}
+  .ov-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--both),var(--acc));width:0;transition:width 1s linear}
+  .ov-total{position:absolute;bottom:14px;left:0;width:100%;color:var(--muted);font-size:13px}
+  .note{font-size:13px;color:var(--muted);margin-top:26px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--up);border-radius:12px}
+  footer{padding:30px 0 60px;color:var(--muted);font-size:13px;text-align:center}
+  @media(max-width:560px){.battle{grid-template-columns:1fr}.slot{grid-template-columns:64px 1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <div class="kicker">Préparation physique trail</div>
+        <h1>Blinde tes cuisses<br>pour la descente 🏔️</h1>
+        <p class="sub">Programme de renforcement au poids du corps — 1 séance de 30 min par semaine, ciblée montée <b style="color:var(--up)">D+</b> et surtout descente <b style="color:var(--down)">D-</b>.</p>
+      </div>
+      <div class="countdown">
+        <div class="n" id="days">—</div>
+        <div class="l">jours avant le départ</div>
+        <div style="margin-top:8px;font-size:13px;color:var(--muted)">Course : <b>16 oct. 2026</b></div>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">🏁 <b>65 km</b></span>
+      <span class="badge">⛰️ <b>4000 m</b> D+</span>
+      <span class="badge">🔻 <b>5500 m</b> D-</span>
+      <span class="badge">📍 La Réunion</span>
+      <span class="badge">🎯 Finir sans exploser en descente</span>
+    </div>
+  </div>
+  <svg class="mountains" viewBox="0 0 1200 150" preserveAspectRatio="none"><path d="M0 150 L180 40 L320 110 L480 20 L650 100 L820 30 L1000 95 L1200 45 L1200 150 Z" fill="#26384a"/><path d="M0 150 L140 90 L340 130 L520 70 L720 125 L900 80 L1120 130 L1200 100 L1200 150 Z" fill="#1c2a37"/></svg>
+</header>
+
+<nav><div class="wrap">
+  <a href="#defi">Le défi</a>
+  <a href="#exos">Les exercices</a>
+  <a href="#seance">La séance 30 min</a>
+  <a href="#prog">Progression 9 sem.</a>
+  <a href="#suivi">Mon suivi</a>
+</div></nav>
+
+<!-- LE DEFI -->
+<section id="defi"><div class="wrap">
+  <h2><span class="em">⚔️</span> Le défi : ça descend plus que ça monte</h2>
+  <p class="lead">5500 m de descente pour 4000 m de montée : un profil « cassant ». Comme tu t'entraînes sur le plat en région parisienne, ton vrai déficit n'est pas le cardio mais la <b>résistance des cuisses à la descente</b>. Tout le programme est construit autour de ça.</p>
+  <div class="battle">
+    <div class="col up">
+      <h3>⛰️ Montée (D+) — 4000 m</h3>
+      <div class="meter up"><i></i></div>
+      <div style="font-size:13px;color:var(--muted)">Effort <b style="color:var(--ink)">concentrique</b> : les muscles se raccourcissent pour te propulser.</div>
+      <ul>
+        <li><b>Quadriceps</b> & <b>grand fessier</b></li>
+        <li><b>Chaîne postérieure</b> (ischios)</li>
+        <li><b>Mollets</b> (soléaire ++)</li>
+        <li>Stabilité du bassin</li>
+        <li>Endurance de force (effort long)</li>
+      </ul>
+    </div>
+    <div class="col down">
+      <h3>🔻 Descente (D-) — 5500 m</h3>
+      <div class="meter down"><i></i></div>
+      <div style="font-size:13px;color:var(--muted)">Effort <b style="color:var(--ink)">excentrique</b> : le muscle freine <b>en s'allongeant</b>. C'est ce qui détruit les cuisses.</div>
+      <ul>
+        <li><b>Force excentrique</b> des quadriceps</li>
+        <li>Capacité de <b>freinage</b></li>
+        <li><b>Tolérance aux impacts</b> répétés</li>
+        <li>Stabilité genou & cheville</li>
+        <li>Contrôle du bassin & <b>proprioception</b></li>
+        <li>Résistance à la fatigue excentrique</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight">💡 <b>L'effet protecteur :</b> t'entraîner en excentrique habitue le muscle à la contrainte de la descente (« repeated bout effect ») — il se lèse ensuite beaucoup moins. C'est ton assurance jour J, venant du plat.</div>
+</div></section>
+
+<!-- EXOS -->
+<section id="exos"><div class="wrap">
+  <h2><span class="em">💪</span> Les exercices</h2>
+  <p class="lead">Filtre selon ce que tu veux travailler. Clique sur « Détails » pour l'exécution, les points clés et les erreurs à éviter. Chaque carte a sa vidéo.</p>
+  <div class="filters">
+    <span class="chip active" data-f="all">Tout</span>
+    <span class="chip" data-f="dplus">⛰️ Spécial montée</span>
+    <span class="chip" data-f="dmoins">🔻 Spécial descente</span>
+    <span class="chip" data-f="both">🟢 Les deux</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<!-- SEANCE -->
+<section id="seance"><div class="wrap">
+  <h2><span class="em">⏱️</span> La séance — 30 min chrono</h2>
+  <p class="lead">Format en <b>superséries</b> (on enchaîne 2 exos puis on récupère) pour tout caser en 30 min. À faire un jour de course facile ou de repos — <b>jamais dans les 48 h avant une sortie longue.</b></p>
+  <button id="startTimer" class="playbtn">▶ Lancer le dérouleur de séance (30 min guidées)</button>
+  <div class="tl">
+    <div class="slot warm"><div class="time">4'<small>échauff.</small></div><div class="what"><b>🔥 Échauffement</b><span>Chevilles, balancers de jambe, 15 squats, 10 fentes/jambe, montées de genoux, talons-fesses.</span></div></div>
+    <div class="slot a"><div class="time">7'<small>Bloc A</small></div><div class="what"><b>⛰️ Force / Montée (D+)</b><span>Fente / Split squat + Hip thrust unilatéral — 3 séries en superset.</span></div></div>
+    <div class="slot b"><div class="time">11'<small>Bloc B</small></div><div class="what"><b>🔻 Spécifique descente / excentrique — le cœur</b><span>Step-down excentrique + Mollet excentrique (superset) puis Squat sauté amorti.</span></div></div>
+    <div class="slot c"><div class="time">5'<small>Bloc C</small></div><div class="what"><b>🟢 Stabilité / gainage</b><span>Équilibre unipodal proprioceptif + Planche & Copenhagen.</span></div></div>
+    <div class="slot cool"><div class="time">3'<small>calme</small></div><div class="what"><b>🧘 Retour au calme</b><span>Étirements doux (quadris, mollets, fessiers, adducteurs), respiration. Pas d'étirement intense après l'excentrique.</span></div></div>
+  </div>
+</div></section>
+
+<!-- PROGRESSION -->
+<section id="prog"><div class="wrap">
+  <h2><span class="em">📈</span> Progression sur 9 semaines</h2>
+  <p class="lead">Règle d'or : on augmente <b>une seule variable à la fois</b> — d'abord l'amplitude & la technique, puis le temps sous tension, puis les reps, puis la charge (sac à dos), enfin l'instabilité et les impacts. Puis on allège pour arriver frais.</p>
+  <div class="phases">
+    <div class="phase p1"><div class="p"></div><div class="wk">Semaines 1–3</div><h4>🧩 Adaptation</h4><div class="dates">13 août → 2 sept</div>
+      <ul><li>Apprendre la technique</li><li>Excentrique tempo 3 s</li><li>Split squat avec appui</li><li><b>Pas de saut</b> : réceptions douces</li><li>Copenhagen genou fléchi</li></ul></div>
+    <div class="phase p2"><div class="p"></div><div class="wk">Semaines 4–6</div><h4>🏗️ Force + excentrique</h4><div class="dates">3 sept → 23 sept</div>
+      <ul><li>Reps hautes des fourchettes</li><li>Excentrique 4–5 s</li><li>Sac à dos léger (3–5 kg)</li><li>Réception depuis marche basse</li><li>Copenhagen jambe tendue</li></ul></div>
+    <div class="phase p3"><div class="p"></div><div class="wk">Semaines 7–8</div><h4>⚡ Spécifique impact</h4><div class="dates">24 sept → 7 oct</div>
+      <ul><li>Charge 5–8 kg</li><li>Marche plus haute (step-down)</li><li><b>Vrais squats sautés amortis</b></li><li>Copenhagen dynamique</li><li>Proprio yeux fermés</li></ul></div>
+    <div class="phase p4"><div class="p"></div><div class="wk">Semaine 9 + course</div><h4>🪶 Affûtage</h4><div class="dates">8 oct → 16 oct</div>
+      <ul><li><b>Volume ÷ 2</b></li><li>Dernière séance dure ~7–8 oct</li><li>Plus de saut ni excentrique lourd</li><li>Gainage léger + mobilité</li><li>Rien de courbaturant à 10 j</li></ul></div>
+  </div>
+  <div class="rules">
+    <div class="rule"><div class="q">➕ Quand ajouter des reps ?</div><div class="a">Quand tu finis toutes tes séries avec la bonne technique et 1–2 reps « en réserve ». Ajoute 1–2 reps/série — mais plafonné aux fourchettes, et stop pendant l'affûtage.</div></div>
+    <div class="rule"><div class="q">🐢 Quand ralentir l'excentrique ?</div><div class="a">Dès la phase 2 : allonge la descente de 3 s vers 4–5 s sur le step-down et le mollet.</div></div>
+    <div class="rule"><div class="q">🔼 Quand corser ?</div><div class="a">À chaque changement de phase (~toutes les 2–3 sem.), ou plus tôt si l'effort perçu tombe sous 7/10.</div></div>
+    <div class="rule"><div class="q">🪶 Comment arriver frais ?</div><div class="a">L'excentrique/pliométrie crée des microlésions qui cicatrisent en plusieurs jours. On arrête le « dur » ~10 j avant, tout en gardant le corps réveillé par du léger.</div></div>
+  </div>
+  <div class="note">⚠️ Deux réglages liés à tes antécédents : <b>Copenhagen</b> démarré genou fléchi (pubalgie), et <b>pliométrie</b> décalée en semaine 3-4 (aponévrosite plantaire). En cas de douleur au talon/voûte ou au pubis, allège et demande l'avis de ta kiné.</div>
+</div></section>
+
+<!-- SUIVI -->
+<section id="suivi"><div class="wrap">
+  <h2><span class="em">✅</span> Mon suivi</h2>
+  <p class="lead">Coche chaque séance faite. Ton avancement est sauvegardé dans ce navigateur.</p>
+  <div class="tracker">
+    <div class="progresswrap"><div id="bar"></div></div>
+    <div class="ptxt" id="ptxt">0 / 9 séances</div>
+    <div class="weeks" id="weeks"></div>
+    <button class="reset" id="reset">Réinitialiser</button>
+  </div>
+</div></section>
+
+<div class="overlay" id="ov">
+  <div class="ov-phase warm" id="ovPhase"></div>
+  <button class="ov-close" id="ovClose">✕ Fermer</button>
+  <div class="ov-kicker warm" id="ovKicker">Échauffement</div>
+  <div class="ov-name" id="ovName">Prêt ?</div>
+  <div class="ov-sub" id="ovSub"></div>
+  <div class="ov-target" id="ovTarget" style="display:none"></div>
+  <div class="ring">
+    <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54"></circle><circle class="fg" id="ovRing" cx="60" cy="60" r="54" stroke-dasharray="339.3" stroke-dashoffset="0"></circle></svg>
+    <div class="num" id="ovNum">0:00</div>
+  </div>
+  <div class="ov-next" id="ovNext"></div>
+  <div class="ov-ctrl">
+    <button id="ovPrev">⏮</button>
+    <button class="main" id="ovPlay">Pause</button>
+    <button id="ovSkip">⏭</button>
+  </div>
+  <div class="ov-total" id="ovTotal"></div>
+  <div class="ov-bar"><i id="ovBar"></i></div>
+</div>
+
+<footer><div class="wrap">Bon entraînement Clément 💪 — support de préparation physique, ne remplace pas l'avis de ta kiné.</div></footer>
+
+<script>
+const EX = [
+  {ico:"🏋️",name:"Fente / Split squat",cat:"dplus",tag:"D+",block:"Bloc A",goal:"Quadriceps, grand fessier, stabilité du bassin. Force de poussée en côte.",
+   reps:"8–12 / jambe",series:"3 séries",rest:"45–60 s",diff:1,
+   exec:"Grand pas en avant, pied arrière sur la pointe. Descends verticalement genou avant au-dessus du pied, buste droit légèrement penché. Remonte en poussant dans le talon avant.",
+   keys:"Poids sur la jambe avant, genou dans l'axe du pied, descente contrôlée 2–3 s.",
+   err:"Genou qui rentre (valgus), buste qui s'effondre, appui sur la jambe arrière.",
+   prog:"Appui d'un doigt au mur → sans appui → pied arrière surélevé (bulgare) → sac à dos.",
+   vid:"https://www.youtube.com/watch?v=eCJxHKDXBqk"},
+  {ico:"🍑",name:"Hip thrust unilatéral",cat:"dplus",tag:"D+",block:"Bloc A",goal:"Grand fessier & chaîne postérieure. Puissance de hanche pour la montée.",
+   reps:"12–20 / jambe",series:"3 séries",rest:"45–60 s",diff:1,
+   exec:"Haut du dos sur le canapé/banc, une jambe tendue, l'autre pied au sol genou à 90°. Monte le bassin, aligne épaules-hanches-genou, serre le fessier 2 s, redescends en contrôle.",
+   keys:"Menton rentré, on pousse avec le fessier (pas les lombaires), bassin qui ne tourne pas.",
+   err:"Cambrer le bas du dos ; sentir le quadriceps/ischio → avance le talon d'appui.",
+   prog:"Sans poids → tenue 2–3 s → sac à dos sur le bassin → jambe libre plus haut.",
+   vid:"https://www.youtube.com/watch?v=9bW2x6mM1XU"},
+  {ico:"🪜",name:"Step-down excentrique",cat:"dmoins",tag:"D-",block:"Bloc B",star:true,goal:"Quadriceps en excentrique + contrôle du genou. L'exercice le plus proche du geste de descente.",
+   reps:"6–10 / jambe (descente 3–5 s)",series:"3 séries",rest:"60 s",diff:2,
+   exec:"Debout sur une marche, une jambe dans le vide. Descends TRÈS lentement en pliant la jambe d'appui jusqu'à effleurer le sol du talon libre, puis remonte (aide-toi un peu de la jambe libre au début). Toute la lenteur est dans la descente.",
+   keys:"Genou d'appui au-dessus des orteils, buste droit, contrôle jusqu'au bout, pose du talon en douceur (pas de claquement).",
+   err:"Se laisser tomber, genou en dedans, marche trop haute au début.",
+   prog:"Marche basse 3 s → marche + haute → 5 s → sac à dos → sans aide pour remonter.",
+   vid:"https://www.youtube.com/watch?v=sR_UegtSClI",vid2:"https://www.youtube.com/watch?v=8aCxvnBjkd8",vid2l:"6 exos descente"},
+  {ico:"🦵",name:"Mollet excentrique unipodal",cat:"both",tag:"D-/D+",block:"Bloc B",goal:"Soléaire & gastrocnémiens en freinage. Absorption de la cheville. Bonus : protège l'aponévrose plantaire.",
+   reps:"15–20 / jambe (descente 3 s)",series:"2–3 séries",rest:"45 s",diff:2,
+   exec:"Avant-pied sur le bord d'une marche, mains au mur/rampe. Monte sur la pointe des 2 pieds, puis descends lentement sur UNE jambe, talon sous le niveau de la marche. Remonte sur 2 jambes.",
+   keys:"Amplitude max (talon bas), descente contrôlée. Alterne genou tendu (gastrocs) / légèrement fléchi (soléaire, clé en descente).",
+   err:"Amplitude écourtée, à-coups, rebond en bas.",
+   prog:"Sur 2 jambes → excentrique unipodal → sac à dos → + de reps.",
+   vid:"https://www.youtube.com/watch?v=KlQ3xYKKX08"},
+  {ico:"🐱",name:"Squat sauté à réception amortie",cat:"dmoins",tag:"D-",block:"Bloc B",goal:"Quadriceps/fessiers/mollets en absorption pliométrique. Apprend à encaisser le choc.",
+   reps:"6–10 réceptions",series:"2–3 séries",rest:"60–90 s",diff:3,
+   exec:"Au début la réception prime sur le saut. Depuis un mini-saut, réceptionne en douceur sur l'avant-pied puis tout le pied, genoux+hanches fléchis, et FIGE 1–2 s (atterrissage de chat, silencieux). Progresse ensuite vers de vrais squats sautés.",
+   keys:"Réception silencieuse, genoux alignés, amorti simultané genoux+hanches, se stabiliser avant la rép suivante.",
+   err:"Réception raide/bruyante, talons en premier, genoux en valgus. À introduire seulement à partir de la semaine 3-4 (aponévrosite).",
+   prog:"Mini-saut → drop d'une marche basse → squat sauté amorti → réception sur une jambe.",
+   vid:"https://www.youtube.com/watch?v=--rMFguvBQQ"},
+  {ico:"🧍",name:"Équilibre unipodal proprioceptif",cat:"dmoins",tag:"D-",block:"Bloc C",goal:"Stabilisateurs de cheville, moyen fessier, contrôle genou & bassin.",
+   reps:"30 s / jambe",series:"2 séries",rest:"30 s",diff:1,
+   exec:"Debout sur une jambe, genou légèrement fléchi, bassin horizontal. Tiens 30 s. Complexifie : yeux fermés → surface molle (coussin) → bouge la jambe libre / attrape un objet au sol.",
+   keys:"Bassin horizontal (pas de bascule), genou aligné au pied, regard fixe puis yeux fermés.",
+   err:"Crisper la cheville, hanche qui s'affaisse, aller trop vite vers l'instable.",
+   prog:"Sol stable yeux ouverts → yeux fermés → surface molle → gestes dynamiques.",
+   vid:"https://www.campus.coach/blog/meilleurs-exercices-proprioception-trail",vidl:"Voir le guide"},
+  {ico:"🧱",name:"Gainage : planche + Copenhagen",cat:"both",tag:"D-/D+",block:"Bloc C",goal:"Sangle abdominale, obliques, adducteurs. Anti-rotation du tronc ; protège le bassin.",
+   reps:"Planche 30–45 s · Copenhagen 10–20 s/côté",series:"2 séries",rest:"30 s",diff:2,
+   exec:"Planche avant-bras, corps aligné. Copenhagen : sur le côté, jambe du dessus sur un banc/canapé, GENOU FLÉCHI au début, monte le bassin et tiens ; progresse vers jambe tendue puis dynamique.",
+   keys:"Bassin qui ne s'affaisse pas, épaules qui ne roulent pas vers le plafond (Copenhagen), respire.",
+   err:"Lombaires creusées, hanches qui tombent, Copenhagen tendu/dynamique trop tôt (pubalgie).",
+   prog:"Copenhagen genou fléchi statique → jambe tendue → dynamique.",
+   vid:"https://www.youtube.com/watch?v=iSpkdwUfzwM"}
+];
+const tagClass={"D+":"dplus","D-":"dmoins","D-/D+":"both"};
+const grid=document.getElementById("grid");
+function dots(n){let s="";for(let i=1;i<=3;i++)s+=`<span class="dot ${i<=n?'on':''}"></span>`;return s}
+function render(f){
+  grid.innerHTML="";
+  EX.filter(e=>f==="all"||e.cat===f).forEach(e=>{
+    const alt=e.vid2?`<a class="vid alt" href="${e.vid2}" target="_blank">▶ ${e.vid2l}</a>`:"";
+    const vlabel=e.vidl||"Vidéo";
+    const el=document.createElement("div");el.className="ex";
+    el.innerHTML=`
+      <div class="top"><div class="ico">${e.ico}</div><div><h4>${e.name}${e.star?' ⭐':''}</h4></div></div>
+      <div class="tagrow"><span class="tag ${tagClass[e.tag]}">${e.tag}</span><span class="tag block">${e.block}</span></div>
+      <div class="goal">${e.goal}</div>
+      <div class="dose"><span>${e.reps}</span><span>${e.series}</span><span><small>récup</small> ${e.rest}</span></div>
+      <div class="diff">Difficulté ${dots(e.diff)}</div>
+      <details><summary>Détails technique</summary><div class="body">
+        <p><b>Exécution.</b> ${e.exec}</p>
+        <p><b>👍 Points clés.</b> ${e.keys}</p>
+        <p><b>🚫 Erreurs.</b> ${e.err}</p>
+        <p><b>📊 Progression.</b> ${e.prog}</p>
+      </div></details>
+      <div class="foot"><a class="vid" href="${e.vid}" target="_blank">▶ ${vlabel}</a>${alt}</div>`;
+    grid.appendChild(el);
+  });
+}
+render("all");
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));
+  c.classList.add("active");render(c.dataset.f);
+});
+
+// countdown
+const race=new Date("2026-10-16T07:00:00");
+const d=Math.max(0,Math.ceil((race-new Date())/86400000));
+document.getElementById("days").textContent=d;
+
+// tracker
+const KEY="renfoTrailProgress";
+const wkData=[
+ ["S1","13–19 août","P1"],["S2","20–26 août","P1"],["S3","27 août–2 sept","P1"],
+ ["S4","3–9 sept","P2"],["S5","10–16 sept","P2"],["S6","17–23 sept","P2"],
+ ["S7","24–30 sept","P3"],["S8","1–7 oct","P3"],["S9","8–14 oct","P4 affûtage"]];
+let state=[];try{state=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){state=[]}
+const weeks=document.getElementById("weeks");
+function paint(){
+  weeks.innerHTML="";
+  wkData.forEach((w,i)=>{
+    const done=state.includes(i);
+    const c=document.createElement("div");c.className="wk-cell"+(done?" done":"");
+    c.innerHTML=`<div class="d">${w[1]}</div><div class="s"></div><b>${w[0]} · ${w[2]}</b>`;
+    c.onclick=()=>{state=done?state.filter(x=>x!==i):[...state,i];localStorage.setItem(KEY,JSON.stringify(state));paint()};
+    weeks.appendChild(c);
+  });
+  const n=state.length;
+  document.getElementById("bar").style.width=(n/9*100)+"%";
+  document.getElementById("ptxt").textContent=`${n} / 9 séances`+(n===9?" — bravo, prêt pour La Réunion ! 🎉":"");
+}
+paint();
+document.getElementById("reset").onclick=()=>{state=[];localStorage.setItem(KEY,"[]");paint()};
+
+/* ===== DÉROULEUR DE SÉANCE (minuteur) ===== */
+const PH={warm:"Échauffement",a:"Bloc A · Montée (D+)",b:"Bloc B · Descente (D-)",c:"Bloc C · Stabilité",cool:"Retour au calme",rest:"Récupération"};
+function W(ph,name,sub,target,dur){return{ph,name,sub,target,dur}}
+function R(dur,ph){return{ph:"rest",name:"Récupération",sub:"Respire, relâche.",target:"",dur,nextph:ph}}
+const STEPS=[
+  W("warm","Échauffement","Chevilles, balancers de jambe, squats, fentes, montées de genoux, talons-fesses. Monte progressivement en intensité.","4 min en continu",240),
+  // BLOC A x3 (140s/round)
+  W("a","Fente / Split squat","Descente contrôlée, genou dans l'axe, poids sur la jambe avant.","8–12 / jambe · série 1/3",50),
+  W("a","Hip thrust unilatéral","Pousse avec le fessier, serre 2 s en haut.","12–20 / jambe · série 1/3",50),
+  R(40,"a"),
+  W("a","Fente / Split squat","Même qualité de descente.","8–12 / jambe · série 2/3",50),
+  W("a","Hip thrust unilatéral","Bassin bien aligné.","12–20 / jambe · série 2/3",50),
+  R(40,"a"),
+  W("a","Fente / Split squat","Dernière série, technique avant tout.","8–12 / jambe · série 3/3",50),
+  W("a","Hip thrust unilatéral","Contrôle la descente.","12–20 / jambe · série 3/3",50),
+  R(40,"b"),
+  // BLOC B partie 1 : step-down + mollet x3 (150s/round)
+  W("b","Step-down excentrique ⭐","Descente TRÈS lente (3–5 s), pose du talon en douceur.","6–10 / jambe · série 1/3",55),
+  W("b","Mollet excentrique unipodal","Talon bien bas, descente 3 s sur une jambe.","15–20 / jambe · série 1/3",45),
+  R(50,"b"),
+  W("b","Step-down excentrique ⭐","Genou au-dessus des orteils.","6–10 / jambe · série 2/3",55),
+  W("b","Mollet excentrique unipodal","Amplitude maximale.","15–20 / jambe · série 2/3",45),
+  R(50,"b"),
+  W("b","Step-down excentrique ⭐","Contrôle jusqu'au dernier centimètre.","6–10 / jambe · série 3/3",55),
+  W("b","Mollet excentrique unipodal","Pas de rebond en bas.","15–20 / jambe · série 3/3",45),
+  R(50,"b"),
+  // BLOC B partie 2 : squat sauté amorti x3 (70s/set)
+  W("b","Squat sauté à réception amortie","Réception SILENCIEUSE, fige 1–2 s. La réception prime sur le saut.","6–10 réceptions · série 1/3",30),
+  R(40,"b"),
+  W("b","Squat sauté à réception amortie","Genoux alignés, amorti genoux+hanches.","6–10 réceptions · série 2/3",30),
+  R(40,"b"),
+  W("b","Squat sauté à réception amortie","Stabilise-toi entre chaque.","6–10 réceptions · série 3/3",30),
+  R(40,"c"),
+  // BLOC C x2 (150s/round)
+  W("c","Équilibre unipodal proprioceptif","Bassin horizontal, genou aligné. Yeux fermés si tu peux.","30 s / jambe · série 1/2",60),
+  W("c","Gainage : planche + Copenhagen","Planche puis Copenhagen genou fléchi. Bassin qui ne s'affaisse pas.","planche + 10–20 s/côté · série 1/2",60),
+  R(30,"c"),
+  W("c","Équilibre unipodal proprioceptif","Ajoute une surface molle si c'est trop facile.","30 s / jambe · série 2/2",60),
+  W("c","Gainage : planche + Copenhagen","Respire, ne bloque pas.","planche + 10–20 s/côté · série 2/2",60),
+  R(30,"cool"),
+  // COOL
+  W("cool","Retour au calme","Étirements doux : quadriceps, mollets, fessiers, adducteurs. Respiration lente.","3 min",180),
+  W("cool","Séance terminée 💪","Bravo ! Note tes reps/charge/ressenti. N'oublie pas de cocher ta séance dans le suivi.","",5)
+];
+const TOTAL=STEPS.reduce((s,x)=>s+x.dur,0);
+const RC=339.3; // 2*pi*54
+let ci=0, rem=0, paused=false, tick=null, ac=null;
+const ov=document.getElementById("ov");
+function beep(freq,dur){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=freq;o.connect(g);g.connect(ac.destination);g.gain.setValueAtTime(.25,ac.currentTime);o.start();g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+dur);o.stop(ac.currentTime+dur);}catch(e){}}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function elapsedBefore(i){let t=0;for(let k=0;k<i;k++)t+=STEPS[k].dur;return t}
+function load(i){
+  ci=i; const st=STEPS[i]; rem=st.dur;
+  const ph=st.ph;
+  document.getElementById("ovPhase").className="ov-phase "+ph;
+  document.getElementById("ovKicker").className="ov-kicker "+ph;
+  document.getElementById("ovKicker").textContent=st.ph==="rest"?("Récup → "+(PH[st.nextph]||"")):PH[ph];
+  document.getElementById("ovName").textContent=st.name;
+  document.getElementById("ovSub").textContent=st.sub;
+  const tg=document.getElementById("ovTarget");
+  if(st.target){tg.style.display="inline-block";tg.textContent="🎯 "+st.target}else{tg.style.display="none"}
+  const ring=document.getElementById("ovRing");
+  ring.style.stroke = ph==="rest"?"#4a6076":(ph==="a"?"#f4a13c":ph==="b"?"#ff5d5d":ph==="c"?"#7bd88f":ph==="cool"?"#9fb3c2":"#4cc2ff");
+  const nx=STEPS[i+1];
+  document.getElementById("ovNext").innerHTML = nx?("Ensuite : <b>"+nx.name+"</b>"):"Dernière étape";
+  paint2();
+}
+function paint2(){
+  const st=STEPS[ci];
+  document.getElementById("ovNum").textContent=fmt(rem);
+  document.getElementById("ovRing").style.strokeDashoffset = RC*(1 - rem/st.dur);
+  const done=elapsedBefore(ci)+(st.dur-rem);
+  document.getElementById("ovBar").style.width=(done/TOTAL*100)+"%";
+  document.getElementById("ovTotal").textContent="Séance : "+fmt(done)+" / "+fmt(TOTAL);
+}
+function next(){ if(ci<STEPS.length-1){ load(ci+1); beep(660,.15);} else { stop(); } }
+function prev(){ load(Math.max(0,ci-1)); }
+function loop(){
+  if(paused) return;
+  if(rem<=0){ next(); return; }
+  rem--; paint2();
+  if(rem<=3 && rem>0) beep(880,.09);
+}
+function start(){
+  ov.classList.add("on"); paused=false;
+  document.getElementById("ovPlay").textContent="Pause";
+  load(0);
+  clearInterval(tick); tick=setInterval(loop,1000);
+  try{ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}
+}
+function stop(){ ov.classList.remove("on"); clearInterval(tick); tick=null; }
+document.getElementById("startTimer").onclick=start;
+document.getElementById("ovClose").onclick=stop;
+document.getElementById("ovSkip").onclick=()=>next();
+document.getElementById("ovPrev").onclick=()=>prev();
+document.getElementById("ovPlay").onclick=function(){paused=!paused;this.textContent=paused?"Reprendre":"Pause";};
+document.addEventListener("keydown",e=>{if(!ov.classList.contains("on"))return;
+  if(e.code==="Space"){e.preventDefault();document.getElementById("ovPlay").click();}
+  if(e.code==="ArrowRight")next(); if(e.code==="ArrowLeft")prev(); if(e.code==="Escape")stop();});
+</script>
+</body>
+</html>
